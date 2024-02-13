@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wether App</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg bg-dark sticky-top" data-bs-theme="dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="">Weather App</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <!-- <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" aria-current="page" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Dropdown link
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">Action</a></li>
+                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                  <li><a class="dropdown-item" href="#">Something else here</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div> -->
+        </div>
+    </nav>
+
+
+    <div class="d-flex flex-column justify-content-center align-items-center">
+      <div class="card text-bg-body m-3 p-2 border border-0 bg-body-secondary row" style="max-width: 28rem;">
+          <form action="" method="POST">
+              {% csrf_token %}
+              <div class="input-grp d-flex">
+                  <input type="text" class="form-control" name="city" placeholder="City Name">
+                  <div class="input-grp-btn">
+                      <button type="submit" class="btn btn-default">
+                          <i class="fa fa-search" aria-hidden="true"></i>
+                      </button>
+                  </div>
+              </div>
+          </form>
+      </div>
+  
+      <div class="card shadow row m-4 p-3 border border-0 bg-body-secondary" style="max-width: 28rem; min-width: 20rem;">
+        <h3 style="font-size: 1rem;">Info:</h3>
+        {% for message in messages %}
+          <div class="alert alert-dark alert-dismissable fade show d-flex justify-content-between" role="alert">
+              {{message}}
+              <button class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        {% endfor %}
+  
+      {% if name %}
+          <h2>{{ name }}, {{country_code}}</h2>
+          {% if timezone > 0 %}
+          <h4>Time Zone: GMT+{{timezone}}</h4>
+          {% else %}
+          <h4>Time Zone: GMT{{timezone}}</h4>
+          {% endif %}
+          <h5>Coordinate: {{coordinate}}</h5>
+          <h5>Temperature: {{temp}}</h5>
+          <h5>Feels Like: {{feels_like}}</h5>
+          <h5>Atmospheric Pressure: {{pressure}} hPa</h5>
+          <h5>Humudity: {{humidity}} %</h5>
+          <!-- {% comment %}
+          <h4>Country Code: {{country_code}}</h4>
+          <h6>Sunrise: {{sunrise}}</h6>
+          <h6>Sunset: {{sunset}}</h6>
+          {% endcomment %} -->
+      {% endif %}
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+</body>
+</html>
